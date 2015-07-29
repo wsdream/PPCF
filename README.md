@@ -9,7 +9,7 @@ Read more information: [[Paper](http://jiemingzhu.github.io/pub/jmzhu_icws2015.p
 
 If you use this source code in published research, please kindly \*cite* the following paper. Thanks!
 
-- Jieming Zhu, Pinjia He, Zibin Zheng, and Michael R. Lyu, "A Privacy-Preserving QoS Prediction Framework for Web Service Recommendation," in Proc. of IEEE ICWS, 2015.
+- Jieming Zhu, Pinjia He, Zibin Zheng, and Michael R. Lyu, "**A Privacy-Preserving QoS Prediction Framework for Web Service Recommendation**," *in Proc. of IEEE ICWS*, 2015.
 
 
 ##Related Links
