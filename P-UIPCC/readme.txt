@@ -15,7 +15,9 @@ Reference and citation
 Please refer to the following papers for the detailed descriptions of the 
 implemented algorithms:
 
-- TBD
+- Jieming Zhu, Pinjia He, Zibin Zheng, and Michael R. Lyu, "A Privacy-Preserving 
+  QoS Prediction Framework for Web Service Recommendation," in Proc. of IEEE 
+  ICWS, 2015.
 
 IF YOU USE THIS PACKAGE IN PUBLISHED RESEARCH, PLEASE CITE THE ABOVE PAPERS. 
 THANKS!
@@ -104,7 +106,7 @@ Issues
 ----------------------------------------------------------------------------
 
 In case of questions or problems, please do not hesitate to report to our 
-issue page (https://github.com/WS-DREAM/PPCF/issues). We will help ASAP. In 
+issue page (https://github.com/wsdream/PPCF/issues). We will help ASAP. In 
 addition, we will appreciate any contribution to refine and optimize this 
 package.
 
