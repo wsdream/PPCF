@@ -1,15 +1,15 @@
-----------------------------------------------------------------------------
-README file for P-PMF
-----------------------------------------------------------------------------
+****************************************************************************
+* README file for P-PMF
+* Author: Jamie Zhu <jimzhu@GitHub>
+* Last updated: 2015/08/14.  
+****************************************************************************
 
-Author: Jamie Zhu <jimzhu@GitHub><jmzhu AT cse.cuhk.edu.hk>
-Last updated: 2015/2/16.
+This package implements a privacy-preserving QoS prediction approach, P-PMF,
+which has been published in ICWS'15.
 
-This package implements a privacy-preserving QoS prediction approach, P-PMF.
-
-----------------------------------------------------------------------------
+****************************************************************************
 Reference and citation
-----------------------------------------------------------------------------
+****************************************************************************
 
 Please refer to the following papers for the detailed descriptions of the 
 implemented algorithms:
@@ -21,9 +21,9 @@ implemented algorithms:
 IF YOU USE THIS PACKAGE IN PUBLISHED RESEARCH, PLEASE CITE THE ABOVE PAPERS. 
 THANKS!
 
-----------------------------------------------------------------------------
+****************************************************************************
 Dependencies
-----------------------------------------------------------------------------
+****************************************************************************
 
 - Python 2.7 (https://www.python.org)
 - Cython 0.20.1 (http://cython.org)
@@ -43,9 +43,9 @@ modify the c++ source files and want to re-compile them.
 It is worth noting that our implementation is also based on numpy and scipy 
 packages, so you would also need to install these packages first.
 
-----------------------------------------------------------------------------
+****************************************************************************
 Contents of this package
-----------------------------------------------------------------------------
+****************************************************************************
 
 P-PMF/
   - run_rt.py               - script file for running the experiments on 
@@ -74,9 +74,9 @@ P-PMF/
                               matrix density = 5%
       - [...]               - many other results
 
-----------------------------------------------------------------------------
+****************************************************************************
 Usage of this package
-----------------------------------------------------------------------------
+****************************************************************************
 
 For ease of reproducing and compare with other approaches, we provide the 
 detailed experimental results with five metrics (MAE, NMAE, RMSE, MRE, NPRE), 
@@ -100,20 +100,18 @@ platforms, we has only tested the current version on Linux.
 
 >> python setup.py build_ext --inplace
 
-----------------------------------------------------------------------------
+****************************************************************************
 Issues
-----------------------------------------------------------------------------
+****************************************************************************
 
 In case of questions or problems, please do not hesitate to report to our 
 issue page (https://github.com/wsdream/PPCF/issues). We will help ASAP. In 
 addition, we will appreciate any contribution to refine and optimize this 
 package.
 
-----------------------------------------------------------------------------
-Copyright
-----------------------------------------------------------------------------
-
-Copyright (c) WS-DREAM@GitHub, CUHK.
+****************************************************************************
+Copyright (c) WS-DREAM Team, CUHK
+****************************************************************************
 
 Permission is granted for anyone to copy, use, modify, or distribute this 
 program and accompanying programs and documents for any purpose, provided 
@@ -121,6 +119,5 @@ this copyright notice is retained and prominently displayed, along with a
 note saying that the original programs are available from our web page 
 (https://wsdream.github.io). The program is provided as-is, and there are 
 no guarantees that it fits your purposes or that it is bug-free. All use 
-of these programs is entirely at the user's own risk. For any enquiries, 
-please feel free to contact Jamie Zhu <jmzhu AT cse.cuhk.edu.hk>.
+of these programs is entirely at the user's own risk.
 
