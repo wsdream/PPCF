@@ -72,14 +72,14 @@ def errMetric(realVec, estiVec, metrics):
         if 'RMSE' == metric:
             rmse = LA.norm(absError) / np.sqrt(absError.shape)
             result = np.append(result, rmse)
-        if 'MRE' == metric or 'NNPRE' == metric:
+        if 'MRE' == metric or 'NPRE' == metric:
             relativeError = absError / realVec
             if 'MRE' == metric:
                 mre = np.average(relativeError)
                 result = np.append(result, mre)
-            if 'NNPRE' == metric:
+            if 'NPRE' == metric:
                 relativeError = np.sort(relativeError)
-                npre = relativeError[int(np.floor(0.99 * relativeError.shape[0]))] 
+                npre = relativeError[int(np.floor(0.9 * relativeError.shape[0]))] 
                 result = np.append(result, npre)
     return result
 

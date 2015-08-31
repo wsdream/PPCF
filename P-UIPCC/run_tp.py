@@ -22,7 +22,7 @@ para = {'dataPath': '../data/',
         'dataName': 'dataset#1',
         'dataType': 'tp', # set the dataType as 'rt' or 'tp'
 		'outPath': 'result/',
-		'metrics': ['MAE', 'NMAE', 'RMSE', 'MRE', 'NPRE'], # delete where appropriate	
+		'metrics': ['MAE', 'NMAE', 'RMSE'], # delete where appropriate	
 		'density': np.arange(0.05, 0.31, 0.05), # matrix density 
 		'rounds': 20, # how many runs are performed at each matrix density
 		'topK': 10, # the parameter of TopK similar users or services, the default value is

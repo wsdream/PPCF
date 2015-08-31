@@ -1,7 +1,0 @@
-Average running time (second):
-density=0.05: 38.0471
-density=0.10: 45.7320
-density=0.15: 56.6806
-density=0.20: 65.0555
-density=0.25: 74.7262
-density=0.30: 75.2645

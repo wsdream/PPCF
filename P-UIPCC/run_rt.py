@@ -30,7 +30,7 @@ para = {'dataPath': '../data/',
 		'lambda': 0.9, # the combination coefficient of UPCC and IPCC
 		'noiseType': 'uniform', # the type of noises: 'guassian' or 'uniform'
 		'noiseRange': 0.5, # the range of the noises
-		'saveTimeInfo': True, # whether to keep track of the running time
+		'saveTimeInfo': False, # whether to keep track of the running time
 		'saveLog': True, # whether to save log into file
 		'debugMode': False, # whether to record the debug info
 		'parallelMode': False # whether to leverage multiprocessing for speedup
