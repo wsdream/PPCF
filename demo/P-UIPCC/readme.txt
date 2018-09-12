@@ -28,47 +28,34 @@ Dependencies
 - Python 2.7 (https://www.python.org)
 - numpy 1.8.1 (http://www.scipy.org)
 - scipy 0.13.3 (http://www.scipy.org)
-- pywsrec (https://github.com/wsdream/pywsrec)
 
 The benchmark is implemented in Python. For efficiency purpose, the core 
-algorithms are written as Python extension using C++, and have been built 
-into pywsrec package for common use. 
+algorithms are written as Python extension using C++.  
 
 ****************************************************************************
 Contents of this package
 ****************************************************************************
 
-P-UIPCC/
+demo/P-UIPCC/
 |-- readme.txt                  - description of this package 
 |-- run_rt.py                   - script file for running the experiments on 
 |                                 response-time QoS data 
 |-- run_tp.py                   - script file for running the experiments on 
 |                                 throughput QoS data
-|-- evaluator.py                - control execution and results collection of 
+|-- benchmark.py                - control execution and results collection of 
 |                                 the QoS prediction algorithm
 |-- result/                     - directory for storing evaluation results
 |  |                              with metrics: (MAE, NMAE, RMSE, MRE, NPRE)
-|  |-- dataset#1_rt_result.txt  - The response-time prediction result
-|  |-- dataset#1_tp_result.txt  - The throughput prediction result
+|  |-- dataset1_rt_result.txt   - The response-time prediction result
+|  |-- dataset1_tp_result.txt   - The throughput prediction result
 
-../commons/
+PPCF/commons/
 |-- dataloader.py        - a script to load the dataset (with preprocessing)
-|-- evallib.py           - common functions for evaluator.py
+|-- evaluator.py         - common functions for benchmark.py
 |-- utils.py             - a script containing a bag of useful utilities
 
-****************************************************************************
-Usage of this package
-****************************************************************************
+PPCF/P_UIPCC/              - P_UIPCC algorithm writing using C++ 
 
-For ease of reproducing and compare with other approaches, we provide the 
-detailed experimental results with five metrics (MAE, NMAE, RMSE, MRE, NPRE), 
-under the "result/" directory, after running the above QoS prediction approaches
-on the dataset: "data/dataset#1". E.g.,"result/rtResult_0.05.txt" records the 
-evaluation results under matrix density = 5%. In particular, each experiment 
-is run for 20 times and the average result (including std value) is reported. 
-These results can be directly used for your research work.
-
-More usage information is available at: https://github.com/wsdream/PPCF
 
 ****************************************************************************
 Issues

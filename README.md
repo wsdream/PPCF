@@ -8,32 +8,36 @@ Read more information from our paper:
 
 
 ### Dependencies
-- Python 2.7 (https://www.python.org)
-- numpy 1.8.1 (http://www.scipy.org)
-- scipy 0.13.3 (http://www.scipy.org)
-- pywsrec (https://github.com/wsdream/pywsrec)
-
+- Python 2.7
+- numpy
+- scipy 
+- cython
 
 ### Usage
 
-The benchmark is implemented as a Python package. For efficiency purpose, the core algorithms are written as Python extension using C++.
+The benchmark is implemented in Python. For efficiency purpose, the core algorithms are written as Python extension using C++.
 
 1. Download the package: [https://github.com/wsdream/PPCF/archive/master.zip](https://github.com/wsdream/PPCF/archive/master.zip),
 
    or use Git: `git clone https://github.com/wsdream/PPCF.git`.
 
-2. Download WS-DREAM datasets to the `data` folder.
-3. Configure the parameters in benchmark script
-  
-  For example, in `run_rt.py`, you can config the `'parallelMode': True` if you are running a multi-core machine. You can also set `'rounds': 1` for testing, which make the execution finish soon.
+2. Download [WS-DREAM datasets](https://github.com/wsdream/wsdream-dataset) to the `data` folder.
 
-3. Run the benchmark scripts
+3. Build extension modules based on Cython
+
+   ```
+   $ cd PPCF/
+   $ python setup.py build_ext --inplace
+   ```  
+
+4. Run the demo scripts
      
-  ```    
-    $ python run_rt.py
-    $ python run_tp.py 
-    ```
-4. Check the evaluation results in "result/" directory. Note that the repository has maintained the evaluation results on [WS-DREAM datasets](https://github.com/wsdream/dataset) that are ready for immediate use.
+   ```
+   $ cd PPCF/demo/P-PMF
+   $ python run_rt.py
+   $ python run_tp.py 
+   ```
+5. Check the evaluation results in "result/" directory. Note that we have already provided the results of 20 random runs in the directory for your reference.
 
 
 ### Feedback
