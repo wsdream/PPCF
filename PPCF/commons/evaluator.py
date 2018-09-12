@@ -8,7 +8,7 @@
 import numpy as np 
 from numpy import linalg as LA
 import os, sys, time
-from commons.utils import logger
+import logging
 import cPickle as pickle
 import random
 
@@ -92,8 +92,8 @@ def dumpresult(outFile, result):
         with open(outFile, 'wb') as fid:
                 pickle.dump(result, fid)
     except Exception, e:
-        logger.error('Dump file failed: ' + outFile)
-        logger.error(e)
+        logging.error('Dump file failed: ' + outFile)
+        logging.error(e)
         sys.exit()
 
 

@@ -6,7 +6,7 @@
 ########################################################
 
 import numpy as np 
-from utils import logger
+import logging
 import os
 
 
@@ -15,13 +15,13 @@ import os
 #======================================================#
 def load(para):
     datafile = para['dataPath'] + para['dataName'] + '/' + para['dataType'] + 'Matrix.txt'
-    logger.info('Loading data: %s'%os.path.abspath(datafile))
+    logging.info('Loading data: %s'%os.path.abspath(datafile))
     dataMatrix = np.loadtxt(datafile)
     dataMatrix = preprocess(dataMatrix, para)
-    logger.info('Data size: %d users * %d services'\
+    logging.info('Data size: %d users * %d services'\
         %(dataMatrix.shape[0], dataMatrix.shape[1]))
-    logger.info('Loading data done.')
-    logger.info('----------------------------------------------') 
+    logging.info('Loading data done.')
+    logging.info('----------------------------------------------') 
     return dataMatrix
 
 

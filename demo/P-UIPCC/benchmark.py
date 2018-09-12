@@ -5,15 +5,15 @@
 # Last updated: 2015/8/30
 ########################################################
 
-import numpy as np 
+import numpy as np
 from numpy import linalg as LA
 import time, sys, os
 import random
-import cPickle as pickle
-from commons.utils import logger
-from pywsrec.PPCF import P_UIPCC
-from commons import evallib
+import logging
 import multiprocessing
+import cPickle as pickle
+from PPCF import P_UIPCC
+from PPCF.commons import evaluator
 
 
 #======================================================#
@@ -40,74 +40,73 @@ def execute(matrix, para):
 # Function to run the prediction approach at one setting
 #======================================================#
 def executeOneSetting(matrix, density, roundId, para):
-    logger.info('density=%.2f, %2d-round starts.'%(density, roundId + 1))
+    logging.info('density=%.2f, %2d-round starts.'%(density, roundId + 1))
     startTime = time.clock()
     timeResult = np.zeros(5)
     evalResult = np.zeros((len(para['metrics']), 5))
 
     # remove data matrix    
-    logger.info('Removing data matrix...')
-    (trainMatrix, testMatrix) = evallib.removeEntries(matrix, density, roundId) 
+    logging.info('Removing entries from data matrix...')
+    (trainMatrix, testMatrix) = evaluator.removeEntries(matrix, density, roundId) 
 
     # data perturbation by adding noises
-    logger.info('Data perturbation...')
+    logging.info('Data perturbation...')
     (perturbMatrix, uMean, uStd) = randomPerturb(trainMatrix, para)
 
     # UMEAN
-    logger.info('UMEAN prediction...')
+    logging.info('UMEAN prediction...')
     iterStartTime1 = time.clock()   
     predMatrixUMEAN = P_UIPCC.UMEAN(perturbMatrix)  
     timeResult[0] = time.clock() - iterStartTime1
     
     # IMEAN
-    logger.info('IMEAN prediction...')
+    logging.info('IMEAN prediction...')
     iterStartTime2 = time.clock()          
     predMatrixIMEAN = P_UIPCC.IMEAN(perturbMatrix)
     timeResult[1] = time.clock() - iterStartTime2
 
     # UPCC
-    logger.info('UPCC prediction...')
+    logging.info('UPCC prediction...')
     iterStartTime3 = time.clock()
     predMatrixUPCC = P_UIPCC.UPCC(perturbMatrix, para)
     timeResult[2] = time.clock() - iterStartTime3 + timeResult[0]
     
     # IPCC
-    logger.info('IPCC prediction...')
+    logging.info('IPCC prediction...')
     iterStartTime4 = time.clock()         
     predMatrixIPCC = P_UIPCC.IPCC(perturbMatrix, para) 
     timeResult[3] = time.clock() - iterStartTime4 + timeResult[1]
 
     # UIPCC
-    logger.info('UIPCC prediction...')
+    logging.info('UIPCC prediction...')
     iterStartTime5 = time.clock()       
     predMatrixUIPCC = P_UIPCC.UIPCC(perturbMatrix, predMatrixUPCC, predMatrixIPCC, para)    
     timeResult[4] = time.clock() - iterStartTime5 + timeResult[2] + timeResult[3]
 
     # evaluate the estimation error  
     predMatrixUMEAN = reNormalize(predMatrixUMEAN, uMean, uStd)
-    evalResult[:, 0] = evallib.evaluate(testMatrix, predMatrixUMEAN, para)
+    evalResult[:, 0] = evaluator.evaluate(testMatrix, predMatrixUMEAN, para)
 
     predMatrixIMEAN = reNormalize(predMatrixIMEAN, uMean, uStd)
-    evalResult[:, 1] = evallib.evaluate(testMatrix, predMatrixIMEAN, para)
+    evalResult[:, 1] = evaluator.evaluate(testMatrix, predMatrixIMEAN, para)
    
     predMatrixUPCC = reNormalize(predMatrixUPCC, uMean, uStd)
-    evalResult[:, 2] = evallib.evaluate(testMatrix, predMatrixUPCC, para)
+    evalResult[:, 2] = evaluator.evaluate(testMatrix, predMatrixUPCC, para)
 
     predMatrixIPCC = reNormalize(predMatrixIPCC, uMean, uStd)
-    evalResult[:, 3] = evallib.evaluate(testMatrix, predMatrixIPCC, para)
+    evalResult[:, 3] = evaluator.evaluate(testMatrix, predMatrixIPCC, para)
 
     predMatrixUIPCC = reNormalize(predMatrixUIPCC, uMean, uStd)
-    evalResult[:, 4] = evallib.evaluate(testMatrix, predMatrixUIPCC, para)
-
+    evalResult[:, 4] = evaluator.evaluate(testMatrix, predMatrixUIPCC, para)
 
     # dump the result at each density
     result = (evalResult, timeResult)
     outFile = '%s%s_%s_result_%.2f_round%02d.tmp'%(para['outPath'], para['dataName'], 
         para['dataType'], density, roundId + 1)
-    evallib.dumpresult(outFile, result)
+    evaluator.dumpresult(outFile, result)
     
-    logger.info('density=%.2f, %2d-round done.'%(density, roundId + 1))
-    logger.info('----------------------------------------------')
+    logging.info('density=%.2f, %2d-round done.'%(density, roundId + 1))
+    logging.info('----------------------------------------------')
 
 
 #======================================================#
@@ -130,7 +129,7 @@ def summarizeResult(para):
             os.remove(inputfile)
         k += 1
     for i in xrange(len(approach)):
-        evallib.saveSummaryResult(path + '_' + approach[i], evalResults[:, :, :, i], timeResult[:, :, i], para)
+        evaluator.saveSummaryResult(path + '_' + approach[i], evalResults[:, :, :, i], timeResult[:, :, i], para)
 
 
 #======================================================#

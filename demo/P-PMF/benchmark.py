@@ -7,10 +7,10 @@
 
 import numpy as np 
 import time
-from commons.utils import logger
-from commons import evallib
-from pywsrec.PPCF import P_PMF
+from PPCF.commons import evaluator
+from PPCF import P_PMF
 import multiprocessing
+import logging
 
 
 #======================================================#
@@ -30,41 +30,41 @@ def execute(matrix, para):
             for roundId in xrange(para['rounds']):
                 executeOneSetting(matrix, den, roundId, para)
     # summarize the dumped results
-    evallib.summarizeResult(para)
+    evaluator.summarizeResult(para)
 
 
 #======================================================#
 # Function to run the prediction approach at one setting
 #======================================================#
 def executeOneSetting(matrix, density, roundId, para):
-    logger.info('density=%.2f, %2d-round starts.'%(density, roundId + 1))
+    logging.info('density=%.2f, %2d-round starts.'%(density, roundId + 1))
     startTime = time.clock()
 
     # remove data matrix    
-    logger.info('Removing data matrix...')
-    (trainMatrix, testMatrix) = evallib.removeEntries(matrix, density, roundId) 
+    logging.info('Removing entries from data matrix...')
+    (trainMatrix, testMatrix) = evaluator.removeEntries(matrix, density, roundId) 
 
     # data perturbation by adding noises
-    logger.info('Data perturbation...')
+    logging.info('Data perturbation...')
     (perturbMatrix, uMean, uStd) = randomPerturb(trainMatrix, para)
 
     # QoS prediction
-    logger.info('QoS prediction...')
+    logging.info('QoS prediction...')
     predictedMatrix = P_PMF.predict(perturbMatrix, para)
     predictedMatrix = reNormalize(predictedMatrix, uMean, uStd)
     runningTime = float(time.clock() - startTime) 
 
     # evaluate the estimation error  
-    evalResult = evallib.evaluate(testMatrix, predictedMatrix, para)
+    evalResult = evaluator.evaluate(testMatrix, predictedMatrix, para)
     result = (evalResult, runningTime)
 
     # dump the result at each density
     outFile = '%s%s_%s_result_%.2f_round%02d.tmp'%(para['outPath'], para['dataName'], 
         para['dataType'], density, roundId + 1)
-    evallib.dumpresult(outFile, result)
+    evaluator.dumpresult(outFile, result)
     
-    logger.info('density=%.2f, %2d-round done.'%(density, roundId + 1))
-    logger.info('----------------------------------------------')
+    logging.info('density=%.2f, %2d-round done.'%(density, roundId + 1))
+    logging.info('----------------------------------------------')
 
 
 #======================================================#
