@@ -37,7 +37,7 @@ The benchmark is implemented in Python. For efficiency purpose, the core algorit
    $ python run_rt.py
    $ python run_tp.py 
    ```
-5. Check the evaluation results in "result/" directory. Note that we have already provided the results of 20 random runs in the directory for your reference.
+5. Check the evaluation results in "result/" directory. Note that we have already provided the results of 20 random runs in the result directory for your quick reference.
 
 
 ### Feedback
